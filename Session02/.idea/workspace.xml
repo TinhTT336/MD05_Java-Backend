@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0654d160-adc8-43c6-aa26-22c46faf382b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../Session01_Hibernate/.idea/.name" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Session01_Hibernate/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Session01_Hibernate/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Session01_Hibernate/src/main/java/com/example/controller/ProductController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Session01_Hibernate/src/main/java/com/example/model/dao/ProductDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Session01_Hibernate/src/main/java/com/example/model/dao/ProductDAOImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Session01_Hibernate/src/main/java/com/example/model/entity/Product.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Session01_Hibernate/src/main/java/com/example/model/service/ProductService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Session01_Hibernate/src/main/java/com/example/model/service/ProductServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Session01_Hibernate/src/main/resources/lang_en.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Session01_Hibernate/src/main/resources/lang_ja.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Session01_Hibernate/src/main/resources/lang_vi.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Session01_Hibernate/src/main/webapp/views/product/add.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Session01_Hibernate/src/main/webapp/views/product/edit.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Session01_Hibernate/src/main/webapp/views/product/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/config/AppConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/config/WebConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/controller/ClassroomController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/controller/StudentController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/model/dao/classroom/ClassroomDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/model/dao/classroom/ClassroomDAOImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/model/dao/student/StudentDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/model/dao/student/StudentDAOImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/model/entity/Classroom.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/model/entity/Student.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/model/service/classroom/ClassroomService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/model/service/classroom/ClassroomServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/model/service/student/StudentService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/model/service/student/StudentServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/lang_en.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/lang_vi.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/views/classroom/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/views/student/add.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/views/student/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Session01_Hibernate/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Session01_Hibernate/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Session01_Hibernate/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Session01_Hibernate/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Session01_Hibernate/src/main/database.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../Session01_Hibernate/src/main/database.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Session01_Hibernate/src/main/java/com/example/config/AppConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Session01_Hibernate/src/main/java/com/example/config/AppConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Session01_Hibernate/src/main/java/com/example/model/dao/CategoryDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Session01_Hibernate/src/main/java/com/example/model/dao/CategoryDAOImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Session01_Hibernate/src/main/java/com/example/model/entity/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Session01_Hibernate/src/main/java/com/example/model/entity/Category.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Session01_Hibernate/src/main/webapp/views/category/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Session01_Hibernate/src/main/webapp/views/category/index.html" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="LogFilters">
+    <option name="FILTER_ERRORS" value="false" />
+    <option name="FILTER_WARNINGS" value="false" />
+    <option name="FILTER_INFO" value="true" />
+    <option name="FILTER_DEBUG" value="true" />
+    <option name="CUSTOM_FILTER" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 8
+}]]></component>
+  <component name="ProjectId" id="2a5KL2EdmMM26E4YfalEzjs7pOs" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/Users/admin/Desktop/MODULE_05/Session02/src/main/webapp/views/student",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "settings.editor.selected.configurable": "File.Encoding",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
+    ]
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/webapp/views/student" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.example.config" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Tomcat Server.Tomcat 9.0.831">
+    <configuration name="md05_session02.sql" type="DatabaseScript" editBeforeRun="true" temporary="true" nameIsGenerated="true">
+      <script-file value="$PROJECT_DIR$/src/main/md05_session02.sql" />
+      <script-mode>FILE</script-mode>
+      <method v="2" />
+    </configuration>
+    <configuration name="Tomcat 9.0.831" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.831" ALTERNATIVE_JRE_ENABLED="false">
+      <option name="UPDATING_POLICY" value="hot-swap-classes" />
+      <deployment>
+        <artifact name="Gradle : com.example : Session02-1.0-SNAPSHOT.war">
+          <settings>
+            <option name="CONTEXT_PATH" value="" />
+          </settings>
+        </artifact>
+      </deployment>
+      <server-settings>
+        <option name="BASE_DIRECTORY_NAME" value="4e3c0d10-f53e-4b41-ad17-4ad12ff2c3c5" />
+        <option name="HTTP_PORT" value="8083" />
+      </server-settings>
+      <predefined_log_file enabled="true" id="Tomcat" />
+      <predefined_log_file enabled="true" id="Tomcat Catalina" />
+      <predefined_log_file id="Tomcat Manager" />
+      <predefined_log_file id="Tomcat Host Manager" />
+      <predefined_log_file id="Tomcat Localhost Access" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="58601" />
+      </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Profile">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method v="2">
+        <option name="Make" enabled="true" />
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="Gradle : com.example : Session02-1.0-SNAPSHOT.war" />
+        </option>
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Database Script.md05_session02.sql" />
+      <item itemvalue="Tomcat Server.Tomcat 9.0.831" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Database Script.md05_session02.sql" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0654d160-adc8-43c6-aa26-22c46faf382b" name="Changes" comment="" />
+      <created>1703602942893</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1703602942893</updated>
+      <workItem from="1703602943944" duration="8693000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

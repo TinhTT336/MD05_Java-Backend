@@ -11,8 +11,43 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
+<nav class="navbar navbar-expand-sm navbar-light bg-light">
+<!--    <a class="navbar-brand" href="#">Navbar</a>-->
+<!--    <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"-->
+<!--            aria-controls="collapsibleNavId"-->
+<!--            aria-expanded="false" aria-label="Toggle navigation">-->
+<!--        <span class="navbar-toggler-icon"></span>-->
+<!--    </button>-->
+    <div class="collapse navbar-collapse" id="collapsibleNavId">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item active">
+                <a class="nav-link" href="#" th:text="#{home}"> <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" th:text="#{about}"></a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true"
+                   aria-expanded="false">Language</a>
+                <div class="dropdown-menu" aria-labelledby="dropdownId">
+                    <a class="dropdown-item" href="/?lang=vi">Tiếng Việt</a>
+                    <a class="dropdown-item" href="/?lang=en">Tiếng Anh</a>
+                    <a class="dropdown-item" href="/?lang=ja">Tiếng Nhật</a>
+                </div>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="text" th:placeholder="#{search}">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit" th:text="#{search}"></button>
+        </form>
+    </div>
+</nav>
 <br>
-<a th:href="@{/add}">+ Add Category</a>
+<br>
+<div class="d-flex justify-content-around">
+    <a th:href="@{/add}">+ Add Category</a>
+    <a th:href="@{/product}"> Product</a>
+</div>
 <br>
 <br>
 <table class="table" width="70%">
@@ -30,8 +65,10 @@
         <td th:text="${category.categoryName}"></td>
         <td th:text="${category.categoryStatus}"></td>
         <td><a class="btn btn-primary" th:href="@{edit/{id}(id=${category.id})}">Edit</a></td>
-        <td><a class="btn btn-danger" onclick="return confirm('Are you sure to delete this category?')" th:href="@{delete/{id}(id=${category.id})}">Delete</a></td>
-        <td><a class="btn btn-warning" onclick="return confirm('Are you sure to change this category status?')" th:href="@{change/{id}(id=${category.id})}">Change Status</a></td>
+        <td><a class="btn btn-danger" onclick="return confirm('Are you sure to delete this category?')"
+               th:href="@{delete/{id}(id=${category.id})}">Delete</a></td>
+        <td><a class="btn btn-warning" onclick="return confirm('Are you sure to change this category status?')"
+               th:href="@{change/{id}(id=${category.id})}">Change Status</a></td>
     </tr>
     </tbody>
 </table>

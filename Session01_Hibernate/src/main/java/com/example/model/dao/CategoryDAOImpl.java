@@ -1,6 +1,7 @@
 package com.example.model.dao;
 
 import com.example.model.entity.Category;
+import com.example.model.entity.Product;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,6 +71,7 @@ public class CategoryDAOImpl implements CategoryDAO {
             session.beginTransaction();
             session.delete(findById(id));
             session.getTransaction().commit();
+
         } catch (Exception e) {
             e.printStackTrace();
             session.getTransaction().rollback();

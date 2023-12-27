@@ -33,13 +33,13 @@ import java.util.Properties;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = {"com.example.controller","com.example.model"}) //tu dong quet qua cac thanh phan anh xa ra view
-@PropertySource("classpath:config.properties")
+//@PropertySource("classpath:config.properties")
 public class AppConfig implements WebMvcConfigurer, ApplicationContextAware {
-    @Value("${path}")
-    private String path;
-
-    @Value("${user}")
-    private String user;
+//    @Value("${path}")
+//    private String path;
+//
+//    @Value("${user}")
+//    private String user;
 
     private ApplicationContext applicationContext;
 
@@ -69,7 +69,7 @@ public class AppConfig implements WebMvcConfigurer, ApplicationContextAware {
     public DataSource dataSource() {
         DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
         driverManagerDataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/md01_demo_orm");
+        driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/md05_session02");
         driverManagerDataSource.setUsername("root");
         driverManagerDataSource.setPassword("123456a@");
         return driverManagerDataSource;

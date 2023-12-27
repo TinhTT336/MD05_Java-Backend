@@ -1,6 +1,8 @@
 package com.example.model.entity;
 
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.Set;
 
 @Entity
 @Table(name = "category")
@@ -12,9 +14,19 @@ public class Category {
     @Column(name = "name")
     private String categoryName;
     @Column(name = "status")
-    private boolean categoryStatus=true;
+    private boolean categoryStatus = true;
+    @OneToMany(mappedBy = "category", cascade = CascadeType.REMOVE)
+    private Set<Product> products;
 
     public Category() {
+    }
+
+    public Set<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Set<Product> products) {
+        this.products = products;
     }
 
     public Integer getId() {
@@ -40,4 +52,7 @@ public class Category {
     public void setCategoryStatus(boolean categoryStatus) {
         this.categoryStatus = categoryStatus;
     }
+
+
+
 }
