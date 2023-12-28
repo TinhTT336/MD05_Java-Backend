@@ -17,17 +17,17 @@ public class StudentServiceImpl implements StudentService{
     }
 
     @Override
-    public Boolean save(Student student) {
+    public Student save(Student student) {
         return studentDAO.save(student);
     }
 
     @Override
-    public Boolean update(Student student) {
-        return studentDAO.update(student);
+    public Student update(Student student) {
+        return studentDAO.save(student);
     }
 
     @Override
     public Student findById(Integer id) {
-        return studentDAO.findById(id);
+        return studentDAO.findById(id).get();
     }
 }

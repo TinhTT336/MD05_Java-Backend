@@ -17,7 +17,6 @@ public class ClassroomController {
     public String index(Model model){
         List<Classroom> classroomList=classroomService.findAll();
         model.addAttribute("classroomList",classroomList);
-        System.out.println(classroomList);
         return "classroom/index";
     }
 }

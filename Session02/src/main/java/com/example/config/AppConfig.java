@@ -10,8 +10,14 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.JpaVendorAdapter;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.LocaleResolver;
@@ -26,13 +32,18 @@ import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import org.thymeleaf.templatemode.TemplateMode;
 
+import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.Locale;
 import java.util.Properties;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = {"com.example.controller","com.example.model"}) //tu dong quet qua cac thanh phan anh xa ra view
+
+// Kích hoạt việc quản lý repository JPA trong gói "rikkei.academy.repository".
+// Điều này sử dụng Spring Data JPA để quản lý các repository và tạo ra các bean repository cần thiết.
+@EnableJpaRepositories("com.example.model.dao.student")
+@ComponentScan(basePackages = {"com.example"}) //tu dong quet qua cac thanh phan anh xa ra view
 //@PropertySource("classpath:config.properties")
 public class AppConfig implements WebMvcConfigurer, ApplicationContextAware {
 //    @Value("${path}")
@@ -75,17 +86,57 @@ public class AppConfig implements WebMvcConfigurer, ApplicationContextAware {
         return driverManagerDataSource;
     }
 
-    @Bean
-    public LocalSessionFactoryBean sessionFactoryBean() {
-        LocalSessionFactoryBean localSessionFactoryBean=new LocalSessionFactoryBean();
-        localSessionFactoryBean.setDataSource(dataSource());
-        localSessionFactoryBean.setPackagesToScan("com.example.model.entity");
-        Properties properties=new Properties();
-        properties.setProperty("hibernate.show_sql","true");
-        properties.setProperty("hibernate.dialect","org.hibernate.dialect.MySQLDialect");
-        localSessionFactoryBean.setHibernateProperties(properties);
-        return localSessionFactoryBean;
+    // Định nghĩa các thuộc tính cấu hình cho Hibernate,
+    // chẳng hạn như hibernate.hbm2ddl.auto (chế độ tạo bảng),
+    // hibernate.dialect (ngôn ngữ của cơ sở dữ liệu).
+    private Properties additionalProperties() {
+        Properties properties = new Properties();
+        properties.setProperty("hibernate.hbm2ddl.auto", "update");
+        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
+        return properties;
     }
+
+    //  tương tác với các đối tượng được quản lý của JPA.
+    @Bean
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+        //tạo ra EntityManagerFactory. Nó giúp quản lý các entity, xử lý giao dịch và cung cấp một loạt các tính năng của JPA.
+        LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
+        //Xác định DataSource mà EntityManagerFactory sẽ sử dụng để kết nối đến cơ sở dữ liệu
+        entityManagerFactoryBean.setDataSource(dataSource());
+        // Chỉ định các package cần được quét để tìm kiếm các entity
+        entityManagerFactoryBean.setPackagesToScan("com.example.model.entity");
+
+        JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+        //thông báo rằng Hibernate sẽ được sử dụng làm cài đặt JPA trong ứng dụng
+        entityManagerFactoryBean.setJpaVendorAdapter(vendorAdapter);
+        //Xác định các thuộc tính cấu hình cho Hibernate thông qua phương thức additionalProperties().
+        // Các thuộc tính này có thể bao gồm chế độ tạo bảng (hibernate.hbm2ddl.auto), ngôn ngữ của cơ sở dữ liệu
+        entityManagerFactoryBean.setJpaProperties(additionalProperties());
+        // Trả về đối tượng LocalContainerEntityManagerFactoryBean đã được cấu hình,
+        // sẵn sàng để được sử dụng bởi Spring Container và các thành phần khác trong ứng dụng.
+        return entityManagerFactoryBean;
+    }
+
+    //sử dụng để quản lý giao dịch trong ứng dụng, đặc biệt là khi sử dụng JPA
+    @Bean
+    public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
+        JpaTransactionManager transactionManager = new JpaTransactionManager();
+        transactionManager.setEntityManagerFactory(entityManagerFactory);
+        return transactionManager;
+    }
+
+
+//    @Bean
+//    public LocalSessionFactoryBean sessionFactoryBean() {
+//        LocalSessionFactoryBean localSessionFactoryBean=new LocalSessionFactoryBean();
+//        localSessionFactoryBean.setDataSource(dataSource());
+//        localSessionFactoryBean.setPackagesToScan("com.example.model.entity");
+//        Properties properties=new Properties();
+//        properties.setProperty("hibernate.show_sql","true");
+//        properties.setProperty("hibernate.dialect","org.hibernate.dialect.MySQLDialect");
+//        localSessionFactoryBean.setHibernateProperties(properties);
+//        return localSessionFactoryBean;
+//    }
 
     @Bean
     public SpringResourceTemplateResolver templateResolver() {

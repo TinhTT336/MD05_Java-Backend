@@ -38,7 +38,7 @@ public class StudentController {
     }
     @PostMapping("/student-add")
     public String addPost(@ModelAttribute("student")Student student){
-        if(studentService.save(student)){
+        if(studentService.save(student)!=null){
             return "redirect:/student";
         }
         return "student/add";

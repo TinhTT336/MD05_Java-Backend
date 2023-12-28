@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface StudentService {
     List<Student> findAll();
-    Boolean save(Student student);
-    Boolean update(Student student);
+    Student save(Student student);
+    Student update(Student student);
     Student findById(Integer id);
 }

@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 @Service
 public class ClassroomServiceImpl implements ClassroomService{
-    @Autowired
-    private ClassroomDAO classroomDAO;
+
+
     @Override
     public List<Classroom> findAll() {
-        return classroomDAO.findAll();
+        return null;
     }
 }
