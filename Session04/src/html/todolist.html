@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <style>
+      .completed {
+        text-decoration: line-through;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <h2 class="mt-4 mb-4">todolist</h2>
+          <form action="" class="mb-4" onsubmit="return addTodo()">
+            <div class="form-group d-flex justify-content-between">
+              <input
+                type="text"
+                name=""
+                id="todo-name"
+                class="form-control col-lg-9"
+              />
+              <button type="submit" class="btn btn-primary col-lg-2">
+                Add
+              </button>
+            </div>
+          </form>
+          <table class="table">
+            <thead>
+              <tr>
+                <th></th>
+                <th>#</th>
+                <th>todo</th>
+                <th>Status</th>
+                <th colspan="2">Action</th>
+              </tr>
+            </thead>
+            <tbody id="todo-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+      async function getTodos() {
+        const response = await fetch("http://localhost:8081/todos");
+        const todos = await response.json();
+        let html = ``;
+        todos.forEach((element) => {
+          html += ` <tr>
+               <td class="">
+                  <div class="form-check d-flex align-item-center">
+                    <label class="form-check-label">
+                      <input
+                        type="checkbox"
+                        class="form-check-input"
+                        id="" onclick="toggleTodoCompleted(${element.id})"  ${
+            !element.status ? "checked" : ""
+          }
+                      />
+                    </label>
+                  </div>
+                </td>
+                <td scope="row">${element.id}</td>
+                <td id="todo-${element.id}" class="todo-item  ${
+            !element.status ? "completed" : ""
+          }">${element.todo}</td>
+                <td>${element.status}</td>
+                  <td><button type="submit" class="btn btn-primary" onclick="editTodo(${
+                    element.id
+                  })">Edit</button></td>
+              </tr>`;
+        });
+        let tbody = (document.getElementById("todo-tbody").innerHTML = html);
+      }
+      getTodos();
+
+      function addTodo() {
+        let todo_name = document.getElementById("todo-name").value;
+        let data = JSON.stringify({ todo: todo_name, status: true });
+
+        fetch("http://localhost:8081/todos", {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: data,
+        }).then((response) =>
+          response.json().then((json) => {
+            if (json.status == 500) {
+              Swal.fire({
+                position: "top-end",
+                icon: "error",
+                title: `Wrong`,
+                showConfirmButton: false,
+                timer: 1500,
+              });
+            } else {
+              Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Your work has been saved",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+              getTodos();
+            }
+            document.getElementById("todo-name").value = "";
+          })
+        );
+        return false;
+      }
+
+      function editTodo(id) {
+        const todoElement = document.getElementById(`todo-${id}`);
+        const todoValue = todoElement.textContent;
+
+        // Tạo một phần tử input mới
+        const inputElement = document.createElement("input");
+        inputElement.type = "text";
+        inputElement.value = todoValue;
+
+        // Thay thế phần tử td bằng input
+        todoElement.innerHTML = "";
+        todoElement.appendChild(inputElement);
+
+        // Đặt trọng tâm vào input
+        inputElement.focus();
+
+        // Xử lý sự kiện khi người dùng kết thúc chỉnh sửa
+        inputElement.addEventListener("blur", function () {
+          const updatedTodoValue = inputElement.value;
+
+          // Gọi hàm để gửi yêu cầu API để cập nhật công việc
+          updateTodo(id, updatedTodoValue);
+        });
+      }
+
+      async function updateTodo(id, updatedTodoValue) {
+        const todo = {
+          todo: updatedTodoValue,
+        };
+
+        try {
+          const response = await fetch(`http://localhost:8081/todos/${id}`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(todo),
+          });
+
+          if (response.ok) {
+            // Cập nhật danh sách công việc sau khi chỉnh sửa thành công
+            getTodos();
+          } else {
+            console.error("Error updating todo:", response.statusText);
+          }
+        } catch (error) {
+          console.error("Error updating todo:", error);
+        }
+      }
+
+      async function toggleTodoCompleted(id) {
+        const todoElement = document.getElementById(`todo-${id}`);
+        todoElement.classList.toggle("completed");
+        const todo = { status: false };
+        try {
+          const response = await fetch(`http://localhost:8081/todos/${id}`, {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(todo),
+          });
+          if (response.ok) {
+            // Cập nhật danh sách công việc sau khi chỉnh sửa thành công
+            getTodos();
+          } else {
+            console.error("Error updating todo:", response.statusText);
+          }
+        } catch (error) {
+          console.error("Error updating todo:", error);
+        }
+      }
+    </script>
+  </body>
+</html>
