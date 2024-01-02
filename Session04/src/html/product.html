@@ -18,31 +18,41 @@
     />
   </head>
   <body>
-    <div class="container">
-      <div class="row">
+    <div class="container mt-5">
+      <h1>Product List</h1>
+      <div class="row mt-4">
         <div class="col-lg-8">
           <table class="table">
             <thead>
               <tr>
                 <th>ID</th>
                 <th>Name</th>
-                <th>Status</th>
+                <th>Price</th>
+                <th>Category Name</th>
                 <th>Action</th>
               </tr>
             </thead>
             <tbody id="t-body"></tbody>
           </table>
         </div>
-        <div class="col-lg-4 mt-3">
-          <form onsubmit="return addCategory()">
+        <div class="col-lg-4">
+          <form onsubmit="return addProduct()">
             <div class="form-group">
-              <label for="category-name">Category Name</label>
+              <label for="category-name">Product Name</label>
               <input
                 type="text"
                 name=""
-                id="category-name"
+                id="product-name"
                 class="form-control"
               />
+            </div>
+            <div class="form-group">
+              <label for="category-name">Product Price</label>
+              <input type="text" name="" id="price" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label for="category-name">Category Name</label>
+              <select name="" id="category-id"></select>
             </div>
             <button type="submit" class="btn btn-primary">Add</button>
           </form>
@@ -69,29 +79,36 @@
     ></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-      async function getCategories() {
-        const response = await fetch("http://localhost:8081/categories");
-        const categories = await response.json();
+      async function getProducts() {
+        const response = await fetch("http://localhost:8081/products");
+        const products = await response.json();
         let _html = ``;
-        categories.forEach((element) => {
-          _html += `<tr>
-          <td scope="row">${element.id}</td>
-          <td>${element.categoryName}</td>
-          <td>${element.status}</td>
-          <td><button class="btn btn-danger" onclick="deleteCategory(${element.id})">Delete</button></td>
-        </tr>`;
+        products.forEach((element) => {
+          _html += ` <tr>
+                <td>${element.productId}</td>
+                <td>${element.productName}</td>
+                <td>${element.price}</td>
+                <td>${element.category.categoryName}</td>
+                <td><button class="btn btn-outline-primary">Edit</button></td>
+              </tr>`;
         });
         let tbody = (document.getElementById("t-body").innerHTML = _html);
       }
-      getCategories();
+      getProducts();
 
-      function addCategory(e) {
-        let category_name = document.getElementById("category-name").value;
+      function addProduct() {
+        let product_name = document.getElementById("product-name").value;
+        let price = document.getElementById("price").value;
+        let category_id = document.getElementById("category-id").value;
+
         let data = JSON.stringify({
-          categoryName: category_name,
-          status: true,
+          productName: product_name,
+          price: price,
+          category_id: category_id,
         });
-        fetch("http://localhost:8081/categories", {
+        console.log(data);
+
+        fetch("http://localhost:8081/products", {
           method: "POST",
           headers: {
             Accept: "application/json",
@@ -101,7 +118,6 @@
         })
           .then((response) => response.json())
           .then((json) => {
-            console.log(json);
             if (json.status == 500) {
               Swal.fire({
                 position: "top-end",
@@ -118,51 +134,29 @@
                 showConfirmButton: false,
                 timer: 1500,
               });
-              getCategories();
+              getProducts();
             }
-            document.getElementById("category-name").value = "";
+            document.getElementById("product-name").value = "";
+            document.getElementById("price").value = "";
+            document.getElementById("category-id").value = "";
           })
           .catch((error) => {
             console.log(error);
           });
         return false;
       }
-      async function deleteCategory(id) {
-        console.log(id);
-        try {
-          const response = await fetch(
-            `http://localhost:8081/categories/${id}`,
-            {
-              method: "DELETE",
-              headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-                "Access-Control-Allow-Origin": "*",
-              },
-            }
-          );
-          if (response.ok) {
-            // Cập nhật danh sách công việc sau khi chỉnh sửa thành công
-            getCategories();
-          } else {
-            console.error("Error deleting todo:", response.statusText);
-          }
-        } catch (error) {
-          console.error("Error deleting todo:", error);
-        }
-      }
 
-      const url = "http://localhost:8081/categories"; // Thay đổi thành nguồn gốc bạn muốn kiểm tra
-
-      fetch(url)
-        .then((response) => {
-          console.log("CORS is supported by the browser.");
-          // Xử lý phản hồi thành công nếu CORS được hỗ trợ
-        })
-        .catch((error) => {
-          console.log("CORS is not supported by the browser.");
-          // Xử lý lỗi nếu CORS không được hỗ trợ
+      async function getCategories() {
+        const response = await fetch("http://localhost:8081/categories");
+        const categories = await response.json();
+        let _categories = ``;
+        categories.forEach((element) => {
+          _categories += `  <option value="${element.id}" class="form-control">${element.categoryName}</option>`;
         });
+        let select = (document.getElementById("category-id").innerHTML =
+          _categories);
+      }
+      getCategories();
     </script>
   </body>
 </html>

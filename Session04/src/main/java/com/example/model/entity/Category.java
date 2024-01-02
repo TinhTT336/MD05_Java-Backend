@@ -1,6 +1,9 @@
 package com.example.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import java.util.Set;
 
 @Entity
 public class Category {
@@ -11,6 +14,22 @@ public class Category {
     private String categoryName;
     @Column(columnDefinition = "boolean default true")
     private Boolean status=true;
+
+    @OneToMany(mappedBy = "category",fetch = FetchType.LAZY)
+    @JsonIgnore
+    //Khi một trường hoặc phương thức được đánh dấu bằng @JsonIgnore,
+    // nó sẽ không được bao gồm trong quá trình chuyển đổi thành JSON hoặc không tham gia quá trình chuyển đổi
+    // từ JSON thành đối tượng Java - tranh lap du lieu
+
+    private Set<Product> productSet;
+
+    public Set<Product> getProductSet() {
+        return productSet;
+    }
+
+    public void setProductSet(Set<Product> productSet) {
+        this.productSet = productSet;
+    }
 
     public Category() {
     }
