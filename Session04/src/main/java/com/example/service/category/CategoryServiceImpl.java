@@ -3,6 +3,9 @@ package com.example.service.category;
 import com.example.model.entity.Category;
 import com.example.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,4 +34,21 @@ public class CategoryServiceImpl implements CategoryService {
     public void delete(Long id) {
         categoryRepository.deleteById(id);
     }
+
+    @Override
+    public Page<Category> getPagination(Pageable pageable) {
+        return categoryRepository.findAll(pageable);
+    }
+
+    @Override
+    public Page<Category> getAllPagination(Pageable pageable) {
+        return categoryRepository.findAll(pageable);
+    }
+
+    @Override
+    public Page<Category> searchByName(Pageable pageable, String name) {
+        return categoryRepository.findAllByCategoryNameContainingIgnoreCase(pageable, name);
+    }
+
+
 }

@@ -6,6 +6,8 @@ import com.example.model.entity.Product;
 import com.example.repository.CategoryRepository;
 import com.example.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,8 +20,8 @@ public class ProductServiceImpl implements ProductService {
     private CategoryRepository categoryRepository;
 
     @Override
-    public List<Product> findAll() {
-        return productRepository.findAll();
+    public Page<Product> findAll(Pageable pageable) {
+        return productRepository.findAll(pageable);
     }
 
     @Override
@@ -41,5 +43,11 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void delete(Long id) {
         productRepository.deleteById(id);
+    }
+
+    @Override
+    public Page<ProductDTO> searchByName(Pageable pageable, String name) {
+        Page<Product> productPage=productRepository.findAllByProductNameContainingIgnoreCase(pageable,name);
+        return productPage.map(product -> new ProductDTO(product));
     }
 }

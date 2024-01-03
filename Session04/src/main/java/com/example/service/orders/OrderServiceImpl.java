@@ -48,7 +48,6 @@ public class OrderServiceImpl implements OrderService {
         if (userId != null) {
             order.setUser(userRepository.findById(userId).orElse(null));
         }
-//        order.setUser(userRepository.findById(orderResponseDTO.getId()).get());
         order.setTotalPrice(orderResponseDTO.getTotalPrice());
         order.setStatus(orderResponseDTO.getStatus());
         order.setPhone(orderResponseDTO.getPhone());

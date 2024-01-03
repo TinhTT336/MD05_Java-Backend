@@ -1,6 +1,7 @@
 package com.example.model.dto;
 
 import com.example.model.entity.Category;
+import com.example.model.entity.Product;
 import jakarta.persistence.*;
 public class ProductDTO {
     private Long productId;
@@ -13,6 +14,20 @@ public class ProductDTO {
 
     public ProductDTO() {
     }
+
+    public ProductDTO(Long productId, String productName, float price, Long categoryId) {
+        this.productId = productId;
+        this.productName = productName;
+        this.price = price;
+        this.categoryId = categoryId;
+    }
+    public ProductDTO(Product product) {
+        this.productId = product.getProductId();
+        this.productName = product.getProductName();
+        this.price = product.getPrice();
+        this.categoryId = product.getCategory().getId();
+    }
+
 
     public Long getProductId() {
         return productId;

@@ -16,4 +16,5 @@ public interface OrderRepository extends JpaRepository<Orders,Long> {
     @Modifying
     @Query("update Orders o set o.status=2 where o.id=?1")
     void cancelOrder(Long id);
+
 }
