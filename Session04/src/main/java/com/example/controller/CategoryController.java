@@ -21,24 +21,20 @@ public class CategoryController {
     private CategoryService categoryService;
 
     @GetMapping("/api/v1/categories/search")
-    public ResponseEntity<Page<Category>> search(@RequestParam(name = "keyword",required = false) String keyword,
+    public ResponseEntity<Page<Category>> search(@RequestParam(name = "keyword", required = false) String keyword,
                                                  @RequestParam(defaultValue = "5", name = "limit") int limit,
                                                  @RequestParam(defaultValue = "0", name = "page") int page,
                                                  @RequestParam(defaultValue = "id", name = "sort") String sort,
                                                  @RequestParam(defaultValue = "asc", name = "order") String order) {
-        Pageable pageable;
         Page<Category> categoryPage;
+
+        Sort.Direction direction = order.equals("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
+        Pageable pageable = PageRequest.of(page, limit, Sort.by(direction, sort));
         if (keyword != null) {
-            if (order.equals("desc")) {
-                pageable = PageRequest.of(page, limit, Sort.by(sort).descending());
-            } else {
-                pageable = PageRequest.of(page, limit, Sort.by(sort).ascending());
-            }
             categoryPage = categoryService.searchByName(pageable, keyword);
-            return new ResponseEntity<>(categoryPage, HttpStatus.OK);
+        } else {
+            categoryPage = categoryService.getAllPagination(pageable);
         }
-        pageable = PageRequest.of(page, limit);
-        categoryPage = categoryService.getAllPagination(pageable);
         return new ResponseEntity<>(categoryPage, HttpStatus.OK);
     }
 

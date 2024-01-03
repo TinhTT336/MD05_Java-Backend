@@ -32,23 +32,18 @@ public class ProductController {
                                                     @RequestParam(name = "sort", defaultValue = "productId") String sort,
                                                     @RequestParam(name = "order", defaultValue = "asc") String order,
                                                     @RequestParam(name = "keyword", required = false) String keyword) {
-        Pageable pageable;
+
+        Sort.Direction direction = order.equals("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
+        Pageable pageable = PageRequest.of(page, limit, Sort.by(direction, sort));
+
         if (keyword != null) {
-            if (order.equals("desc")) {
-                pageable = PageRequest.of(page, limit, Sort.by(sort).descending());
-            } else {
-                pageable = PageRequest.of(page, limit, Sort.by(sort).ascending());
-            }
             Page<ProductDTO> list = productService.searchByName(pageable, keyword);
-            if (list.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-
-            }
-        }
-        pageable = PageRequest.of(page, limit);
-        Page<Product> list = productService.findAll(pageable);
-
+            return new ResponseEntity<>(list,HttpStatus.OK);
+        } else {
+            Page<Product>list = productService.findAll(pageable);
         return new ResponseEntity<>(list.map(ProductDTO::new), HttpStatus.OK);
+        }
+
     }
 
     @GetMapping("/products/{id}")
